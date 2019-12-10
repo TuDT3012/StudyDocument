@@ -1,0 +1,86 @@
+#VAI TRÒ CỦA CÁC LAYER TRONG MÔ HÌNH MANG OSI VÀ TCP/IP
+
+
+##1. Mô hình OSI
+**1.1 Overview OSI model **
+- Các tầng của của mô hình OSI
+
+![cactangosi](https://i.imgur.com/3B3yF6o.png)
+- **Physical Layer**(tầng 1):chuyển đôi các dữ liệu thành các tín hiệu cơ , điện, quang
+thành các tín hiệu nhị phân (0,1) để truyền trên đường truyền vật lý.
+- **Data Link Layer**(Lớp 2): có chức năng định nghĩa các cách thức đóng gói dữ liệu cho
+các loại đường truyền. Thực hiện tương tác với các giao thức của lớp trên,
+tầng Data Link sử dụng địa chỉ Mac (Mac address - Physical Ad
+) là địa chỉ đặc trưng trên tầng này. SWITCH là thiết bị hoạt động ở tầng Da
+Link
+- **Network Layer**(lớp 3): vai trò của tầng Networklà định tuyến đường truyền. Tìm ra
+đường đi tối ưu nhất cho các thực thể. Địa chỉ IP được sử dụng phổ biến của tầng 3(Logical address)
+Router là thiết bị đăng trưng hoạt động ở tầng này. 
+## Các tầng ít liên quan nếu làm thuần về Network
+- **Transport Layer**(lớp 4): làm công viêc quản lý thực hiện các tác vụ truyền dữ liệu từ
+source đến destination (end to end hay host to host). Đảm bảo việc truyền dữ 
+liệu được tối ưu nhất, lưu ý là các tác vụ truyền này phải đảm bảo thông suốt từ các layer 1,2,3.
+- **Sesion Layer** (lớp 5): có vai trò chính trong việc thiết lập, duy trì và giải phóng các 
+session trao đổi dữ liệu giữa các ứng dụng trên 2 host.
+- **Presentation Layer**(lớp 6): thực hiện translate để 2 ứng dụng giữa 2 host với nhau
+để 2 host này có thể hiểu được và giao tiếp với nhau.
+- **Application Layer**(lớp7): giao diện tương tác trực tiếp giữa các ứng dụng và dịch 
+vụ mạng đến người dùng.
+
+**1.2 Cách thức hoạt động của mô hình OSI**
+- Những nguyên tắc hoạt động của mô hình:
+    + Tầng dưới cung cấp dịch vụ cho các tầng trên nó. Các tầng trên chia sẻ gửi yêu cầu dữ liệu xuống 
+    tầng dưới và nhận được kết quả. Các tầng trên sẽ không quan tâm cách thức hoạt động của các 
+    tầng dưới. 
+    + Phân lớp giao tiếp ngang hàng giữa 2 host với nhau, nhưng các lớp ngang hàng nay muốn giao tiếp được
+    với nhau phải thông qua các hoạt động của các lớp dưới. Các loại dữ liệu sẻ đi
+    lần lượt từ lớp trên xuống lớp dưới, cuối cùng đến tầng vật lý sẽ biến đổi thành tín hiệu để đến được
+    host 2 và tiếp tục đi lên lớp ngang hành của host 1.
+    ![cachthuchoatdongcuaosi](https://i.imgur.com/ZIpYzjS.png)
+
+- ** Encapsulation và De-encapsulation** (đóng gói và khử đóng gói)
+![donggoi](https://i.imgur.com/pMUUj9D.png)
+![donggo2i](https://i.imgur.com/hgVPzmz.png)
+Khi các gói tin đi từ lớp Application xuống lớp Physical. Các giao thức đặc trưng của mỗi lớp sẽ quy định 
+cách thức đóng gói dữ liệu. Các gói tin này được gọi là PDU (Protocol Data Unit) các gói tin PDU gồm 2 phần 
+là Header
+(phần thông tin quản lý gói tin của các tầng) và Data ( dữ liệu thưc của gói tin được truyền ).
+- Gói tin PDU đi từ trên xuống dưới chúng sẽ được đóng gói thành data lớp bên dưới và được đóng thêm Header
+của tầng dưới . Cứ xuống thêm một tầng thì sẽ có một header được thêm vào. Đặc biệt ở tầng Data Link, gói
+ tin sẽ được đóng thêm một trường kiểm soát lỗi FCS(phần trailer).
+![datade](https://i.imgur.com/cN3S7bP.png)
+- Tại đầu nhận quá trình mở gói sẽ bắt đầu một chiều ngược lại từ tầng 1 đến tầng 7, cứ mỗi khi lên 1 
+tầng thì header của tầng dưới lại được gỡ bỏ để trả lại gói tin dữ liệu PDU. Đến tầng 7 dữ liệu sẻ được
+ mở gói hoàn toàn. Thực hiện các ứng dụng của tầng này 
+sẽ gửi data trực tiếp đến người dùng.
+- Đơn vị dữ liệu của gói tin trên các tầng: 
+    + Application, Presentation, Session: Data
+    + Transport: Segment
+    + Network: Packet
+    + Data Link: Frame
+    + Physical: bit 
+#**2. Mô hình TCP/IP**
+![mohinhtcp/ip](https://i.imgur.com/cI9CQeN.png)
+- Mô hình này được sử dụng khá rộng rãi, độ phổ biến tương đưowng mô hình OSI, khác với mô hình OSI. TCP/IP 
+tổ chức dữ liệu theo sơ đồ 4 lớp 
+như hình . Trong đó các chứ năng của từng tầng : 
+    + Application Layer: kiêm luôn nhiệm vụ cảu tầng 5,6,7 OSI. Các thực thể cảu 
+    tầng này trong mô hình TCP/IP của cùng một giao thức đều thống nhất nhau về
+    định dạng dữ liệu cũng như các cách thiết lập vào quản lý các session. 
+    + Transport Layer: tương đương Transport của mô hình OSI. Giao Thức nổi tiếng của tầng này là 2 giao 
+    thức TCP và UDP.
+    + Internet layer: hoạt đông như tầng Network OSI. Đặc trung và được sử dụng rộng rãi 
+    của tầng này là giao thức IP.
+    + Network Access Layer: có vài trò của 2 tầng Data Link và Physical.
+Topology phân lớp cũng định nghĩa một hệ thống các giao thức cụ thể cho từng ohaan lớp của mô hình.
+Hệ thống giao thức đi kèm này gọi là chồng giao thức (protocol stack).
+- Hiện tại mô hình TCP/IP được sử dụng rộng rãi hơn mô hình OSI. Mô hình OSI được sử dụng trong 
+việc tham chiếu công nghệ 7 lớp.
+- Các giao thức đặc trưng của từng tầng của mô hình TCP/IP:
+![cachthuchoatdongcuaosi](https://i.imgur.com/KrZpO5W.png)
+- Liệt kê những ứng dụng phổ biến của TCP/IP: 
+    + FTP (File Transfer Prototol): giao thức truyền gile chạy nền TCP.
+    + Telnet : cho phép truy cập từ xa để cấu hình, truy cập thiết bị chạy nền TCP.
+    + DNS (Domain Name System): giao thức phân giải tên miền, ứng dụng chạy cả 2 nền TCP, UDP.
+    + Etc...
+
