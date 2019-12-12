@@ -1,0 +1,24 @@
+#Branch trong git
+- Branch dùng để phân nhánh và ghi lại luồng lịch sử. Branch đã phân nhánh sẽ không ảnh hưởng đến 
+bất kỳ Branch nào khác trong cùng 1 repository nên bạn có thể tiến hành thay đổi trong branch đấy. 
+- Branch đã phân nhánh có thể gộp lại thành một sau khi có những chỉn sửa bằng cách merge chúng lại.
+- Để tạo 1 branch mới ta dùng câu lệnh: git checkout -b (tên branch muốn tạo)
+
+
+![branch1](https://i.imgur.com/6louORz.png)
+
+
+**Branch Master**
+
+- Branch master : khi bạn commit lần đầu trong repository của bạn git sẽ tự động tao 1 branch 
+là Branch master. Những lần sau mọi thay đổi sẽ được chuyển vào Branch cho đến khi bạn chuyển Branch
+khác.
+- Branch có 2 loại , 1 là Branch Integration và Branch Topic.
+- Branch Integration : khi bạn commit lần đầu sẽ tạo ra 1 Branch Master và đó sẽ được gọi là Branch
+Integration . 
+- Branch Topic: khi bạn tạo 1 Branch mới thì sẽ được gọi là Branch Topic. Và khi bạn muốn đẩy 1 thay
+đổi thì git sẽ tạo 1 merget request tại Branch Integration , và khi được thông qua và access thì thay
+đổi sẽ được chấp nhận vào Branch Integration.
+- Head: là lần chỉnh sửa cuối cùng khi bạn commit của branch đó. 
+- Checkout : chuyển đôi từ branch này sang branch khác.
+    + câu lệnh chuyển đổi branch : git checkout (tên branch)
